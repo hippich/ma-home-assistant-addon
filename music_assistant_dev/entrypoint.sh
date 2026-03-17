@@ -73,6 +73,26 @@ if [ "$build_from_source" = true ]; then
     echo "Server URL: $server_url"
     echo ""
 
+    # Build requirements URL from the same reference
+    # Convert git reference to raw GitHub URL for requirements file
+    # Format: owner/repo@ref -> https://raw.githubusercontent.com/owner/repo/ref/requirements_all.txt
+    req_owner=$(echo "$server_ref" | cut -d'/' -f1)
+    req_repo=$(echo "$server_ref" | cut -d'/' -f2 | cut -d'@' -f1)
+    req_ref=$(echo "$server_ref" | cut -d'@' -f2)
+    requirements_url="https://raw.githubusercontent.com/${req_owner}/${req_repo}/${req_ref}/requirements_all.txt"
+
+    echo "Installing dependencies from: $requirements_url"
+    echo ""
+
+    # Install dependencies from the branch's requirements_all.txt
+    uv pip install \
+        --no-cache \
+        --link-mode=copy \
+        -r "$requirements_url"
+
+    echo "✓ Dependencies installed"
+    echo ""
+
     # Install server from specified repository
     uv pip install \
         --no-cache \
@@ -154,10 +174,14 @@ cd "$frontend_dir"
 # Clone the repository
 git clone --depth 1 --branch "$frontend_branch" \
     "https://github.com/${frontend_owner}/${frontend_repo_name}.git" . 2>/dev/null || \
-    git clone "https://github.com/${frontend_owner}/${frontend_repo_name}.git" . && \
-    git checkout "$frontend_branch"
+    (git clone "https://github.com/${frontend_owner}/${frontend_repo_name}.git" . && \
+     git checkout "$frontend_branch")
 
-echo "✓ Frontend cloned"
+# Ensure we have the absolute latest changes from the remote
+git fetch --depth 1 origin "$frontend_branch"
+git reset --hard FETCH_HEAD
+
+echo "✓ Frontend cloned ($(git rev-parse --short HEAD))"
 echo ""
 
 # Check if package.json exists (verify it's a valid frontend repo)
@@ -167,13 +191,15 @@ if [ ! -f "package.json" ]; then
     exit 1
 fi
 
-echo "Installing frontend dependencies...1"
+echo "Installing frontend dependencies..."
 # Try to remount /tmp with exec if it's mounted noexec
 if mount | grep -q "on /tmp.*noexec"; then
   echo "Detected /tmp mounted with noexec, attempting to remount..."
   mount -o remount,exec /tmp 2>/dev/null || echo "Warning: Could not remount /tmp"
 fi
-yarn install --frozen-lockfile --prefer-offline
+# Use persistent cache dir so yarn doesn't re-download packages on every restart
+yarn config set cache-folder /data/.yarn-cache
+yarn install --frozen-lockfile --network-timeout 300000
 
 echo "✓ Dependencies installed"
 echo ""
