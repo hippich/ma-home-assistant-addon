@@ -1,112 +1,118 @@
-# [2.8.0.dev2026031704] - 17.03.2026
+# [2.9.0.dev2026060407] - 04.06.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.8.0.dev2026031314](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026031314)_
+_Changes since [2.9.0.dev2026060308](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026060308)_
 
 ### 🚀 Features and enhancements
 
-- Lyrics Viewer karaoke option for Party (by @apophisnow in #3404)
+- Add Settings to allow Control of default similar_track action (by @chrisuthe in #4053)
+- Support changing audiobook covers (by @OzGav in #4055)
 
 ### 🐛 Bugfixes
 
-- Fix _transitioning_players leak causing frozen queue state (by @chrisuthe in #3368)
-- Rewrite tidal stream behaviour to avoid premature cutoff (by @jozefKruszynski in #3369)
-- Fix: don't reassign the metadata callback for HLS streams, if already set (by @kieranhogg in #3370)
-- Fix Sendspin playback stability issues (by @maximmaxim345 in #3382)
-- Fix albums not being able to be added to playlists during playlist creation (by @fmunkes in #3385)
-- Include nfs-common in Dockerfile.base (by @OzGav in #3389)
-- Emby music provider fix album track order (by @hatharry in #3400)
-- Fix PyAV version detection when building the base image Dockerfile (by @maximmaxim345 in #3402)
+- Fix dynamic smart playlist cache leaking across users with different provider filters (by @dmoo500 in #4061)
+- Fix Bluesound ungroup crashing on non-existent pyblu client attributes (by @OzGav in #4072)
 
 ### 🎨 Frontend Changes
 
-- Remove Party show_player_controls (by @apophisnow in [#1579](https://github.com/music-assistant/frontend/pull/1579))
-- Hide sidebar navigation in frameless mode (by @OzGav in [#1593](https://github.com/music-assistant/frontend/pull/1593))
-- Fix albums not being able to be added to playlists anymore. (by @fmunkes in [#1577](https://github.com/music-assistant/frontend/pull/1577))
+- Show Smart Playlist provider in playlists provider filter (by @dmoo500 in [#1848](https://github.com/music-assistant/frontend/pull/1848))
+- Fanart for top picks (by @stvncode in [#1854](https://github.com/music-assistant/frontend/pull/1854))
+- Fix play button centering + banner behind tile (by @stvncode in [#1852](https://github.com/music-assistant/frontend/pull/1852))
+- Prune stale provider ids from stored listing filters (by @OzGav in [#1727](https://github.com/music-assistant/frontend/pull/1727))
+- Derive library membership from in_library flag (by @OzGav in [#1810](https://github.com/music-assistant/frontend/pull/1810))
+- fix(theme): fix dark-mode rendering (by @teancom in [#1811](https://github.com/music-assistant/frontend/pull/1811))
+- Show catalog providers in library provider filter (by @OzGav in [#1851](https://github.com/music-assistant/frontend/pull/1851))
+- Fix album/playlist track order when played directly from a list (by @OzGav in [#1850](https://github.com/music-assistant/frontend/pull/1850))
 
 ### 🧰 Maintenance and dependency bumps
 
-- Bump orjson from 3.11.5 to 3.11.6 (by @dependabot[bot] in #3373)
-- Remove Party show_player_controls (by @apophisnow in #3391)
-- ⬆️ Update music-assistant-frontend to 2.17.119 (by @music-assistant-machine in #3409)
+<details>
+<summary>7 changes</summary>
+
+- Treat Retry-After as a floor for rate limits, not an exact target (by @rnewman in #4067)
+- Typing fixes for Bluesound provider.py (by @OzGav in #4071)
+- Some Typing fixes for Apple Music (by @OzGav in #4073)
+- Final Typing fixes for Bluesound provider (by @OzGav in #4074)
+- Add PGH003 mypy rule (by @OzGav in #4075)
+- ⬆️ Update music-assistant-models to 1.1.129 (by @music-assistant-machine in #4076)
+- ⬆️ Update music-assistant-frontend to 2.17.175 (by @music-assistant-machine in #4077)
+
+</details>
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@OzGav, @apophisnow, @chrisuthe, @fmunkes, @hatharry, @jozefKruszynski, @kieranhogg, @maximmaxim345
+@OzGav, @chrisuthe, @dmoo500, @rnewman, @stvncode, @teancom
 
 
-# [2.8.0.dev2026031314] - 13.03.2026
-
-## 📦 Nightly Release
-
-_Changes since [2.8.0.dev2026031304](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026031304)_
-
-### 🚀 Features and enhancements
-
-- Narrow down genre linking during scan (by @jozefKruszynski in #3372)
-- Extract date_added from Deezer API for library items (by @sfortis in #3377)
-- Rename the last party mode things (by @apophisnow in #3381)
-
-### 🎨 Frontend Changes
-
-- Final tweaks now playing resolutions (by @MarvinSchenkel in [#1575](https://github.com/music-assistant/frontend/pull/1575))
-- Party mode lyrics and karaoke (by @apophisnow in [#1565](https://github.com/music-assistant/frontend/pull/1565))
-- Update Readme with new guidelines (by @stvncode in [#1574](https://github.com/music-assistant/frontend/pull/1574))
-- fix: revert unneeded word by word feature (by @apophisnow in [#1576](https://github.com/music-assistant/frontend/pull/1576))
-
-### 🧰 Maintenance and dependency bumps
-
-- ⬆️ Update music-assistant-models to 1.1.107 (by @music-assistant-machine in #3379)
-- ⬆️ Update music-assistant-frontend to 2.17.117 (by @music-assistant-machine in #3380)
-- ⬆️ Update music-assistant-frontend to 2.17.118 (by @music-assistant-machine in #3383)
-
-## :bow: Thanks to our contributors
-
-Special thanks to the following contributors who helped with this release:
-
-@MarvinSchenkel, @apophisnow, @jozefKruszynski, @sfortis, @stvncode
-
-
-# [2.8.0.dev2026031304] - 13.03.2026
+# [2.9.0.dev2026060308] - 03.06.2026
 
 ## 📦 Nightly Release
 
-_Changes since [2.8.0.dev2026031204](https://github.com/music-assistant/server/releases/tag/2.8.0.dev2026031204)_
-
-### 🚀 New Providers
-
-- Add NFS Filesystem Provider (by @OzGav in #3276)
+_Changes since [2.9.0.dev2026060218](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026060218)_
 
 ### 🚀 Features and enhancements
 
-- Add Lyrics and Karaoke to Party Mode (by @apophisnow in #3363)
+- Add Bandcamp feed and wishlist recommendations (by @rnewman in #4047)
 
 ### 🐛 Bugfixes
 
-- Fix in progress items recommendation for multi-user setups (by @fmunkes in #3324)
-- Add user awareness to podcast controller (by @fmunkes in #3333)
-- Guard against trailing spaces in auth URLs (by @OzGav in #3362)
-- Fix changing the Sendspin audio format to Automatic (by @maximmaxim345 in #3365)
+- Phishin fixes and optimisations (by @OzGav in #4066)
 
 ### 🎨 Frontend Changes
 
-- Add additional padding to volume popup (by @MarvinSchenkel in [#1573](https://github.com/music-assistant/frontend/pull/1573))
-- Add new custom icon and modify others (by @jozefKruszynski in [#1568](https://github.com/music-assistant/frontend/pull/1568))
-- Add alternate view options in genre overview (by @jozefKruszynski in [#1567](https://github.com/music-assistant/frontend/pull/1567))
-- (Hopefully) Fix party mode tab opening from within HA Companion app (by @MarvinSchenkel in [#1572](https://github.com/music-assistant/frontend/pull/1572))
+- Fix: Mobile issues for discover page and bg for genre and placeholder (by @stvncode in [#1849](https://github.com/music-assistant/frontend/pull/1849))
+- Fix: Mobile issues for discover page and bg for genre and placeholder (by @stvncode in [#1849](https://github.com/music-assistant/frontend/pull/1849))
 
 ### 🧰 Maintenance and dependency bumps
 
-- Improve SMB error and shutdown handling (by @OzGav in #3367)
-- ⬆️ Update music-assistant-frontend to 2.17.116 (by @music-assistant-machine in #3375)
+<details>
+<summary>4 changes</summary>
+
+- Bump usearch from 2.25.2 to 2.25.3 (by @dependabot[bot] in #4063)
+- Bump bandcamp-async-api from 0.2.1 to 0.2.2 (by @dependabot[bot] in #4064)
+- Bump soco from 0.31.0 to 0.31.1 (by @dependabot[bot] in #4065)
+- ⬆️ Update music-assistant-frontend to 2.17.174 (by @music-assistant-machine in #4069)
+
+</details>
 
 ## :bow: Thanks to our contributors
 
 Special thanks to the following contributors who helped with this release:
 
-@MarvinSchenkel, @OzGav, @apophisnow, @fmunkes, @jozefKruszynski, @maximmaxim345
+@OzGav, @rnewman, @stvncode
+
+
+# [2.9.0.dev2026060218] - 02.06.2026
+
+## 📦 Nightly Release
+
+_Changes since [2.9.0.dev2026060208](https://github.com/music-assistant/server/releases/tag/2.9.0.dev2026060208)_
+
+### 🐛 Bugfixes
+
+- Fix loudness volume jumps: scope audio-analysis reads to the authoritative provider (by @MarvinSchenkel in #4057)
+
+### 🎨 Frontend Changes
+
+- Match now-playing typography to new discover tiles (by @MarvinSchenkel in [#1846](https://github.com/music-assistant/frontend/pull/1846))
+- Lokalise translations update (by @[github-actions[bot]](https://github.com/apps/github-actions) in [#1845](https://github.com/music-assistant/frontend/pull/1845))
+- Add shortcut ordering actions (by @dmoo500 in [#1826](https://github.com/music-assistant/frontend/pull/1826))
+- Remove redundant information from the Album overview page (by @MarvinSchenkel in [#1828](https://github.com/music-assistant/frontend/pull/1828))
+- Discover refactor (by @stvncode in [#1842](https://github.com/music-assistant/frontend/pull/1842))
+- Keep shortcuts in sync after delete and update events (by @dmoo500 in [#1819](https://github.com/music-assistant/frontend/pull/1819))
+- Hide player in more places (by @OzGav in [#1711](https://github.com/music-assistant/frontend/pull/1711))
+
+### 🧰 Maintenance and dependency bumps
+
+- ⬆️ Update music-assistant-frontend to 2.17.173 (by @music-assistant-machine in #4060)
+
+## :bow: Thanks to our contributors
+
+Special thanks to the following contributors who helped with this release:
+
+@MarvinSchenkel, @OzGav, @dmoo500, @stvncode
 
 
