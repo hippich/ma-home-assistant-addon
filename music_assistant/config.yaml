@@ -1,5 +1,5 @@
-name: Music Assistant (my fork)
-version: 2.8.9
+name: Music Assistant
+version: 2.9.1
 slug: music_assistant
 description:
   The Music Assistant server is a free, opensource Media library manager
